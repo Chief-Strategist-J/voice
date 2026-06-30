@@ -8,10 +8,16 @@ business_logic:
   - Plays back audio dynamically to the VideoSDK room.
 core_decisions:
   - Architecture: Hexagonal Architecture pattern with clean separation of entry adapters and pure feature services.
-  - SDK: VideoSDK Agent SDK (`videosdk-agents`) for audio routing and session lifecycle management.
+  - SDK: VideoSDK Agent SDK (videosdk-agents) for audio routing and session lifecycle management.
+  - Integration: OpenAI Realtime plugin (videosdk-plugins-openai) for low-latency voice-to-voice stream execution.
 dependencies:
   - videosdk-agents
+  - videosdk-plugins-openai
   - openai
   - python-dotenv
 networking:
   - Relies on WebSockets and WebRTC connections to VideoSDK servers for real-time media streams.
+key_management:
+  - Managed via environment variables (OPENAI_API_KEY, VIDEOSDK_MEETING_ID, VIDEOSDK_TOKEN).
+  - Loaded locally using python-dotenv in entrypoints (main.py, server.py).
+  - Forwarded through docker-compose in containers.
