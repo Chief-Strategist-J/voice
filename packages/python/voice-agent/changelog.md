@@ -59,6 +59,17 @@
     ├── pipeline-mode -> Implemented OpenAISTT, OpenAILLM, OpenAITTS, and SileroVAD cascade setup
     └── dependency-updates -> Added videosdk-plugins-silero package for VAD integrations
 
+[2026-06-30T21:58:00+05:30] Add Multi-Provider (Google, Sarvam, Deepgram/Claude/ElevenLabs) pipelines
+├── File: packages/python/voice-agent/src/features/voice_agent/service.py
+├── File: packages/python/voice-agent/src/features/voice_agent/types.py
+├── File: packages/python/voice-agent/src/features/voice_agent/tests/unit/test_service.py
+└── Changes:
+    ├── environment -> Upgraded python environment to 3.12 via uv to support videosdk-plugins-sarvamai
+    ├── google-pipelines -> Implemented google_realtime and google_cascade mode logic
+    ├── sarvam-pipelines -> Implemented sarvam_cascade mode using SarvamAISTT, SarvamAILLM, SarvamAITTS
+    └── custom-cascade -> Integrated Deepgram STT, Anthropic (Claude) LLM, ElevenLabs TTS, and SileroVAD
+
+
 
 
 

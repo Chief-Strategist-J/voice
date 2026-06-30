@@ -7,7 +7,7 @@ name = "voice-agent"
 version = "0.1.0"
 description = "Voice Agent Service built using VideoSDK Voice Agent Kit"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
@@ -17,6 +17,11 @@ dependencies = [
     "videosdk-plugins-openai>=1.0.0",
     "videosdk-plugins-turn-detector>=1.0.0",
     "videosdk-plugins-silero>=1.0.0",
+    "videosdk-plugins-google>=1.0.0",
+    "videosdk-plugins-sarvamai>=1.0.0",
+    "videosdk-plugins-deepgram>=1.0.0",
+    "videosdk-plugins-elevenlabs>=1.0.0",
+    "videosdk-plugins-anthropic>=1.0.0",
     "openai>=1.0.0",
     "python-dotenv>=1.0.0",
 ]
