@@ -28,4 +28,11 @@
     ├── token-generator -> Implemented HS256 JWT encoding for VideoSDK authentication
     └── env-setup -> Implemented script to generate .env file using user api credentials
 
+[2026-06-30T21:40:00+05:30] Add room creation utility and API endpoint
+├── File: packages/python/voice-agent/src/shared/utils/room_creator.py
+└── Changes:
+    ├── room-creator -> Implemented HTTPS client calling /v2/rooms VideoSDK API
+    └── rest-endpoint -> Added /room/create endpoint to FastAPI server
+
+
 

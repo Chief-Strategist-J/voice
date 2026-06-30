@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 
 from features.voice_agent.index import VoiceAgentConfig, VoiceAgentService, VoiceAgentRepository
+from shared.utils.room_creator import create_videosdk_room
 
 load_dotenv()
 
@@ -18,6 +19,18 @@ class AgentStartRequest(BaseModel):
     instructions: str = "You are a helpful voice assistant."
     voice_name: str = "alloy"
     model_name: str = "gpt-4o-realtime-preview"
+
+@app.post("/room/create")
+async def create_room():
+    token = os.getenv("VIDEOSDK_TOKEN")
+    if not token:
+        raise HTTPException(status_code=500, detail="VIDEOSDK_TOKEN environment variable not set")
+    
+    room_id = create_videosdk_room(token)
+    if not room_id:
+        raise HTTPException(status_code=500, detail="Failed to create VideoSDK room")
+        
+    return {"roomId": room_id}
 
 @app.post("/agent/start")
 async def start_agent(request: AgentStartRequest):
