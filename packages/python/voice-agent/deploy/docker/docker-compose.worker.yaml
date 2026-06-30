@@ -2,87 +2,73 @@ services:
   openai-realtime-agent:
     build:
       context: ../../
-      dockerfile: build/Dockerfile.worker
+      dockerfile: build/Dockerfile.openai_realtime
     environment:
       - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
       - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - PIPELINE_MODE=realtime
-      - AGENT_ID=voice-agent-openai-realtime
     restart: unless-stopped
 
   google-realtime-agent:
     build:
       context: ../../
-      dockerfile: build/Dockerfile.worker
+      dockerfile: build/Dockerfile.google_realtime
     environment:
       - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
       - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - PIPELINE_MODE=google_realtime
-      - AGENT_ID=voice-agent-google-realtime
     restart: unless-stopped
 
   google-cascade-agent:
     build:
       context: ../../
-      dockerfile: build/Dockerfile.worker
+      dockerfile: build/Dockerfile.google_cascade
     environment:
       - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
       - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - PIPELINE_MODE=google_cascade
-      - AGENT_ID=voice-agent-google-cascade
     restart: unless-stopped
 
   sarvam-cascade-agent:
     build:
       context: ../../
-      dockerfile: build/Dockerfile.worker
+      dockerfile: build/Dockerfile.sarvam_cascade
     environment:
       - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
       - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
       - SARVAM_API_KEY=${SARVAM_API_KEY}
-      - PIPELINE_MODE=sarvam_cascade
-      - AGENT_ID=voice-agent-sarvam-cascade
     restart: unless-stopped
 
   custom-cascade-agent:
     build:
       context: ../../
-      dockerfile: build/Dockerfile.worker
+      dockerfile: build/Dockerfile.custom_cascade
     environment:
       - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
       - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
       - DEEPGRAM_API_KEY=${DEEPGRAM_API_KEY}
       - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - PIPELINE_MODE=custom_cascade
-      - AGENT_ID=voice-agent-custom-cascade
     restart: unless-stopped
 
   openai-cascade-agent:
     build:
       context: ../../
-      dockerfile: build/Dockerfile.worker
+      dockerfile: build/Dockerfile.openai_cascade
     environment:
       - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
       - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - PIPELINE_MODE=cascade
-      - AGENT_ID=voice-agent-openai-cascade
     restart: unless-stopped
 
   sip-agent:
     build:
       context: ../../
-      dockerfile: build/Dockerfile.worker
-    command: ["python", "src/main_sip.py"]
+      dockerfile: build/Dockerfile.sip
     environment:
       - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
       - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - AGENT_ID=sip-agent-service
     restart: unless-stopped

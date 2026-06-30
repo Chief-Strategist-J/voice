@@ -122,6 +122,16 @@
     ├── context-ignore -> Created .dockerignore to filter out .venv, cached artifacts, secrets, and tests
     └── context-copy -> Modified all Dockerfiles to copy only the required src/, requirements.txt, and pyproject.toml
 
+[2026-06-30T22:10:00+05:30] Granulate all pipeline runner codes, Dockerfiles, and deployment profiles
+├── File: packages/python/voice-agent/src/main_{openai_realtime,google_realtime,google_cascade,sarvam_cascade,custom_cascade,openai_cascade}.py
+├── File: packages/python/voice-agent/build/Dockerfile.{openai_realtime,google_realtime,google_cascade,sarvam_cascade,custom_cascade,openai_cascade,sip}
+├── File: videosdk-{openai-realtime,google-realtime,google-cascade,sarvam-cascade,custom-cascade,openai-cascade}.yaml
+└── Changes:
+    ├── runner-isolation -> Created dedicated runner script for each individual pipeline setup
+    ├── dockerfile-isolation -> Created distinct Dockerfile building and defaulting to each respective runner
+    └── deployment-isolation -> Configured separate VideoSDK cloud deployment specs pointing directly to each runner path
+
+
 
 
 

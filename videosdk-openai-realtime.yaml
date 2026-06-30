@@ -2,12 +2,10 @@ version: "1.0"
 deployment:
   id: voice_agent_openai_realtime
   entry:
-    path: packages/python/voice-agent/src/main.py
+    path: packages/python/voice-agent/src/main_openai_realtime.py
   env:
     path: packages/python/voice-agent/.env
   secrets:
     VIDEOSDK_AUTH_TOKEN: ${VIDEOSDK_TOKEN}
-    PIPELINE_MODE: realtime
-    AGENT_ID: voice-agent-openai-realtime
   deploy:
     cloud: true
