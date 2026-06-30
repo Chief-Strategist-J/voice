@@ -3,7 +3,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
-from ....features.voice_agent.index import VoiceAgentConfig, VoiceAgentService, VoiceAgentRepository
+from features.voice_agent.index import VoiceAgentConfig, VoiceAgentService, VoiceAgentRepository
 
 load_dotenv()
 

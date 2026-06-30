@@ -15,3 +15,9 @@
 └── Changes:
     ├── deployment-config -> Added videosdk.yaml for VideoSDK Agent Cloud
     └── sip-agent-feature -> Implemented SIP/telephony voice agent service, repository, and tests
+
+[2026-06-30T21:36:00+05:30] Add terminal-based console voice agent runner
+├── File: packages/python/voice-agent/src/console_runner.py
+└── Changes:
+    └── console-runner -> Implemented console_runner.py script using videosdk console mode
+
