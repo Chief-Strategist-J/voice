@@ -79,6 +79,16 @@
     ├── base-image -> Upgraded base image from python:3.11-slim to python:3.12-slim
     └── env-propagation -> Configured docker-compose parameters to forward new api credential flags
 
+[2026-06-30T22:02:00+05:30] Add separate deployment manifests for single agents
+├── File: videosdk-voice.yaml
+├── File: videosdk-sip.yaml
+├── File: packages/python/voice-agent/src/main_sip.py
+└── Changes:
+    ├── voice-deployment -> Created videosdk-voice.yaml deployment manifest for voice agent
+    ├── sip-deployment -> Created videosdk-sip.yaml deployment manifest for SIP agent
+    └── sip-runner -> Added main_sip.py standalone execution entry point for SIP worker
+
+
 
 
 
