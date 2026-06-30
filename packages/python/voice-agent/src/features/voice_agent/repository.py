@@ -2,8 +2,6 @@ from typing import Dict, Optional
 from .types import AgentSessionInfo
 
 class VoiceAgentRepository:
-    """In-memory repository to manage active agent session states."""
-    
     def __init__(self) -> None:
         self._sessions: Dict[str, AgentSessionInfo] = {}
 

@@ -1,0 +1,11 @@
+services:
+  voice-agent-prod:
+    build:
+      context: ../../
+      dockerfile: build/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
+      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}

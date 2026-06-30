@@ -9,7 +9,6 @@ load_dotenv()
 
 app = FastAPI(title="VideoSDK Voice Agent API", version="1.0.0")
 
-# Instantiate repo and service in memory (dependency injection)
 repository = VoiceAgentRepository()
 service = VoiceAgentService(repository)
 
@@ -22,7 +21,6 @@ class AgentStartRequest(BaseModel):
 
 @app.post("/agent/start")
 async def start_agent(request: AgentStartRequest):
-    # Retrieve api keys
     openai_key = os.getenv("OPENAI_API_KEY")
     if not openai_key:
         raise HTTPException(status_code=500, detail="OPENAI_API_KEY environment variable not set")
@@ -36,9 +34,6 @@ async def start_agent(request: AgentStartRequest):
         model_name=request.model_name
     )
     
-    # Normally, JobContext is passed by the worker run-loop when a job is scheduled.
-    # Here, we return a mock status to represent HTTP entry interface mapping.
-    # Real real-time agents join via VideoSDK Worker jobs.
     return {
         "message": "Voice agent initialization request accepted",
         "meeting_id": config.meeting_id,
