@@ -112,6 +112,17 @@
 └── Changes:
     └── worker-scaling -> Declared Google Realtime, Google Cascade, Sarvam, and Custom Cascade services separately
 
+[2026-06-30T22:07:00+05:30] Optimize Docker build context structure
+├── File: packages/python/voice-agent/.dockerignore
+├── File: packages/python/voice-agent/build/Dockerfile
+├── File: packages/python/voice-agent/build/Dockerfile.dev
+├── File: packages/python/voice-agent/build/Dockerfile.test
+├── File: packages/python/voice-agent/build/Dockerfile.worker
+└── Changes:
+    ├── context-ignore -> Created .dockerignore to filter out .venv, cached artifacts, secrets, and tests
+    └── context-copy -> Modified all Dockerfiles to copy only the required src/, requirements.txt, and pyproject.toml
+
+
 
 
 
