@@ -69,6 +69,17 @@
     ├── sarvam-pipelines -> Implemented sarvam_cascade mode using SarvamAISTT, SarvamAILLM, SarvamAITTS
     └── custom-cascade -> Integrated Deepgram STT, Anthropic (Claude) LLM, ElevenLabs TTS, and SileroVAD
 
+[2026-06-30T22:01:00+05:30] Upgrade docker settings for Python 3.12 and multi-provider keys
+├── File: packages/python/voice-agent/build/Dockerfile
+├── File: packages/python/voice-agent/build/Dockerfile.dev
+├── File: packages/python/voice-agent/build/Dockerfile.test
+├── File: packages/python/voice-agent/deploy/docker/docker-compose.dev.yaml
+└── File: packages/python/voice-agent/deploy/docker/docker-compose.prod.yaml
+└── Changes:
+    ├── base-image -> Upgraded base image from python:3.11-slim to python:3.12-slim
+    └── env-propagation -> Configured docker-compose parameters to forward new api credential flags
+
+
 
 
 
