@@ -1,12 +1,13 @@
 import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from dotenv import load_dotenv
+from typing import Optional
 
 from features.voice_agent.index import VoiceAgentConfig, VoiceAgentService, VoiceAgentRepository
 from shared.utils.room_creator import create_videosdk_room
+from shared.utils.agent_dispatcher import dispatch_videosdk_agent
 
-load_dotenv()
+load_dotenv = lambda: None
 
 app = FastAPI(title="VideoSDK Voice Agent API", version="1.0.0")
 
@@ -20,6 +21,11 @@ class AgentStartRequest(BaseModel):
     voice_name: str = "alloy"
     model_name: str = "gpt-4o-realtime-preview"
 
+class AgentDispatchRequest(BaseModel):
+    meeting_id: str
+    agent_id: str
+    metadata: Optional[dict] = None
+
 @app.post("/room/create")
 async def create_room():
     token = os.getenv("VIDEOSDK_TOKEN")
@@ -31,6 +37,20 @@ async def create_room():
         raise HTTPException(status_code=500, detail="Failed to create VideoSDK room")
         
     return {"roomId": room_id}
+
+@app.post("/agent/dispatch")
+async def dispatch_agent_endpoint(request: AgentDispatchRequest):
+    token = os.getenv("VIDEOSDK_TOKEN")
+    if not token:
+        raise HTTPException(status_code=500, detail="VIDEOSDK_TOKEN environment variable not set")
+    
+    result = dispatch_videosdk_agent(
+        token=token,
+        meeting_id=request.meeting_id,
+        agent_id=request.agent_id,
+        metadata=request.metadata
+    )
+    return result
 
 @app.post("/agent/start")
 async def start_agent(request: AgentStartRequest):
