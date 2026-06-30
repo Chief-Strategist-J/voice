@@ -88,6 +88,19 @@
     ├── sip-deployment -> Created videosdk-sip.yaml deployment manifest for SIP agent
     └── sip-runner -> Added main_sip.py standalone execution entry point for SIP worker
 
+[2026-06-30T22:03:00+05:30] Add deployment manifests for all multi-provider pipelines
+├── File: videosdk-openai-realtime.yaml
+├── File: videosdk-google-realtime.yaml
+├── File: videosdk-google-cascade.yaml
+├── File: videosdk-sarvam-cascade.yaml
+├── File: videosdk-custom-cascade.yaml
+├── File: videosdk-openai-cascade.yaml
+├── File: packages/python/voice-agent/src/main.py
+└── Changes:
+    ├── manifest-creation -> Created distinct VideoSDK yaml deployment manifests for each pipeline variety
+    └── main-updates -> Configured main.py to dynamically parse pipeline mode parameters from environment
+
+
 
 
 
