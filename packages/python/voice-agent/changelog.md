@@ -15,4 +15,3 @@
 └── Changes:
     ├── deployment-config -> Added videosdk.yaml for VideoSDK Agent Cloud
     └── sip-agent-feature -> Implemented SIP/telephony voice agent service, repository, and tests
-
