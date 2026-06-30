@@ -13,7 +13,7 @@ def make_context():
     return JobContext(room_options=RoomOptions(
         room_id=os.getenv("VIDEOSDK_MEETING_ID", "default_meeting"),
         auth_token=os.getenv("VIDEOSDK_TOKEN"),
-        name="Google Cascade Agent"
+        name="SIP Voice Agent"
     ))
 
 if __name__ == "__main__":
@@ -21,7 +21,7 @@ if __name__ == "__main__":
         entrypoint=entrypoint,
         jobctx=make_context,
         options=Options(
-            agent_id="voice-agent-google-cascade",
+            agent_id="sip-voice-agent",
             max_processes=5,
             register=True,
             log_level="INFO"

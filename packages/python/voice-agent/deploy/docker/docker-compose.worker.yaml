@@ -1,72 +1,49 @@
 services:
   openai-realtime-agent:
     build:
-      context: ../../
-      dockerfile: src/features/openai_realtime/Dockerfile
-    environment:
-      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
-      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      context: src/features/openai_realtime
+      dockerfile: Dockerfile
+    env_file: src/features/openai_realtime/.env
     restart: unless-stopped
 
   google-realtime-agent:
     build:
-      context: ../../
-      dockerfile: src/features/google_realtime/Dockerfile
-    environment:
-      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
-      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      context: src/features/google_realtime
+      dockerfile: Dockerfile
+    env_file: src/features/google_realtime/.env
     restart: unless-stopped
 
   google-cascade-agent:
     build:
-      context: ../../
-      dockerfile: src/features/google_cascade/Dockerfile
-    environment:
-      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
-      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      context: src/features/google_cascade
+      dockerfile: Dockerfile
+    env_file: src/features/google_cascade/.env
     restart: unless-stopped
 
   sarvam-cascade-agent:
     build:
-      context: ../../
-      dockerfile: src/features/sarvam_cascade/Dockerfile
-    environment:
-      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
-      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
-      - SARVAM_API_KEY=${SARVAM_API_KEY}
+      context: src/features/sarvam_cascade
+      dockerfile: Dockerfile
+    env_file: src/features/sarvam_cascade/.env
     restart: unless-stopped
 
   custom-cascade-agent:
     build:
-      context: ../../
-      dockerfile: src/features/custom_cascade/Dockerfile
-    environment:
-      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
-      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
-      - DEEPGRAM_API_KEY=${DEEPGRAM_API_KEY}
-      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      context: src/features/custom_cascade
+      dockerfile: Dockerfile
+    env_file: src/features/custom_cascade/.env
     restart: unless-stopped
 
   openai-cascade-agent:
     build:
-      context: ../../
-      dockerfile: src/features/openai_cascade/Dockerfile
-    environment:
-      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
-      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      context: src/features/openai_cascade
+      dockerfile: Dockerfile
+    env_file: src/features/openai_cascade/.env
     restart: unless-stopped
 
   sip-agent:
     build:
-      context: ../../
-      dockerfile: build/Dockerfile.sip
-    environment:
-      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
-      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      context: src/features/sip
+      dockerfile: Dockerfile
+    env_file: src/features/sip/.env
     restart: unless-stopped

@@ -1,0 +1,7 @@
+services:
+  sip-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    restart: unless-stopped

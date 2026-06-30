@@ -1,0 +1,7 @@
+services:
+  google-realtime-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    restart: unless-stopped
