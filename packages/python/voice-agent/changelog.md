@@ -45,6 +45,13 @@
     ├── agent-dispatcher -> Implemented HTTP request utility calling /v2/agent/dispatch API
     └── rest-endpoint -> Added /agent/dispatch endpoint to FastAPI server
 
+[2026-06-30T21:48:00+05:30] Add VideoSDK Turn Detector plugin dependency
+├── File: packages/python/voice-agent/requirements.txt
+├── File: packages/python/voice-agent/pyproject.toml
+└── Changes:
+    └── dependency -> Added videosdk-plugins-turn-detector package mapping for turn detection
+
+
 
 
 

@@ -15,6 +15,7 @@ classifiers = [
 dependencies = [
     "videosdk-agents>=1.0.0",
     "videosdk-plugins-openai>=1.0.0",
+    "videosdk-plugins-turn-detector>=1.0.0",
     "openai>=1.0.0",
     "python-dotenv>=1.0.0",
 ]
