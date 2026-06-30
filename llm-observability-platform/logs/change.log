@@ -8,3 +8,11 @@
         ├── entry-adapters -> Implemented REST API (server.py) and background worker (main.py)
         ├── testing-suite -> Added unit tests in test_service.py
         └── docker-config -> Added Dockerfile variants and docker-compose files
+
+[2026-06-30T21:29:00+05:30] Add agent deployment configuration and SIP telephony agent feature
+├── File: videosdk.yaml
+├── File: packages/python/voice-agent/src/features/sip_agent/
+└── Changes:
+    ├── deployment-config -> Added videosdk.yaml for VideoSDK Agent Cloud
+    └── sip-agent-feature -> Implemented SIP/telephony voice agent service, repository, and tests
+

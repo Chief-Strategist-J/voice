@@ -1,0 +1,14 @@
+feature_name: sip_agent
+description: Telephony and SIP AI Voice Agent integration.
+criticality: HIGH - Enters SIP/PSTN-bridged VideoSDK rooms to handle calls.
+business_logic:
+  - Joins rooms specifically routed from SIP provider integrations (e.g. Twilio).
+  - Handles real-time voice calls.
+  - Supports call hangup and call state tracking.
+core_decisions:
+  - Architecture: Separated into clean feature vertical slice.
+  - Integration: Relies on room routing mapping and agent.hangup API.
+dependencies:
+  - videosdk-agents
+  - videosdk-plugins-openai
+  - python-dotenv
