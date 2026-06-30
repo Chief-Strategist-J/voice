@@ -24,6 +24,27 @@ async def test_start_agent_session_success():
     assert isinstance(result, AgentSessionInfo)
     assert result.meeting_id == "test-meeting-id"
 
+@pytest.mark.asyncio
+async def test_start_agent_session_cascade_success():
+    repository = VoiceAgentRepository()
+    service = VoiceAgentService(repository)
+    
+    mock_ctx = AsyncMock()
+    mock_ctx.job_id = "test-job-id"
+    mock_ctx.connect = AsyncMock()
+    
+    config = VoiceAgentConfig(
+        meeting_id="test-meeting-id",
+        token="test-token",
+        openai_api_key="test-key",
+        pipeline_mode="cascade"
+    )
+    
+    result = await service.start_agent_session(config, mock_ctx)
+    
+    assert isinstance(result, AgentSessionInfo)
+    assert result.meeting_id == "test-meeting-id"
+
 def test_repository_operations():
     repository = VoiceAgentRepository()
     

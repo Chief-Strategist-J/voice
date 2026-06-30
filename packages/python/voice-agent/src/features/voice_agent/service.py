@@ -2,7 +2,14 @@ import asyncio
 import logging
 from typing import Optional
 from videosdk.agents import Agent, AgentSession, Pipeline, JobContext
-from videosdk.agents.plugins import OpenAIRealtime, OpenAIRealtimeConfig
+from videosdk.agents.plugins import (
+    OpenAIRealtime,
+    OpenAIRealtimeConfig,
+    OpenAISTT,
+    OpenAILLM,
+    OpenAITTS,
+    SileroVAD
+)
 
 from .types import VoiceAgentConfig, AgentSessionInfo
 from .repository import VoiceAgentRepository
@@ -23,13 +30,25 @@ class VoiceAgentService:
 
     async def start_agent_session(self, config: VoiceAgentConfig, ctx: JobContext) -> AgentSessionInfo:
         try:
-            model_config = OpenAIRealtimeConfig(
-                api_key=config.openai_api_key,
-                voice=config.voice_name,
-                model=config.model_name
-            )
-            model = OpenAIRealtime(config=model_config)
-            pipeline = Pipeline(llm=model)
+            if config.pipeline_mode == "cascade":
+                stt = OpenAISTT(api_key=config.openai_api_key)
+                llm = OpenAILLM(api_key=config.openai_api_key, model="gpt-4o-mini", instructions=config.instructions)
+                tts = OpenAITTS(api_key=config.openai_api_key, voice=config.voice_name)
+                pipeline = Pipeline(
+                    stt=stt,
+                    llm=llm,
+                    tts=tts,
+                    vad=SileroVAD()
+                )
+            else:
+                model_config = OpenAIRealtimeConfig(
+                    api_key=config.openai_api_key,
+                    voice=config.voice_name,
+                    model=config.model_name
+                )
+                model = OpenAIRealtime(config=model_config)
+                pipeline = Pipeline(llm=model)
+
             agent = VideoSDKVoiceAgent(instructions=config.instructions)
             await ctx.connect()
             session = AgentSession(agent=agent, pipeline=pipeline, context=ctx)

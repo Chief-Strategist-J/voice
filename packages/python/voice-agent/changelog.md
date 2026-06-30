@@ -51,6 +51,15 @@
 └── Changes:
     └── dependency -> Added videosdk-plugins-turn-detector package mapping for turn detection
 
+[2026-06-30T21:51:00+05:30] Add Cascade Pipeline (STT -> LLM -> TTS) feature options
+├── File: packages/python/voice-agent/src/features/voice_agent/service.py
+├── File: packages/python/voice-agent/src/features/voice_agent/types.py
+├── File: packages/python/voice-agent/src/features/voice_agent/tests/unit/test_service.py
+└── Changes:
+    ├── pipeline-mode -> Implemented OpenAISTT, OpenAILLM, OpenAITTS, and SileroVAD cascade setup
+    └── dependency-updates -> Added videosdk-plugins-silero package for VAD integrations
+
+
 
 
 

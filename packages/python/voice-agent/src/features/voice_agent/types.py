@@ -9,6 +9,7 @@ class VoiceAgentConfig:
     instructions: str = "You are a helpful voice assistant."
     voice_name: str = "alloy"
     model_name: str = "gpt-4o-realtime-preview"
+    pipeline_mode: str = "realtime"
 
 @dataclass
 class AgentSessionInfo:
