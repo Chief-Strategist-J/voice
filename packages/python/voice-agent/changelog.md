@@ -131,6 +131,14 @@
     ├── dockerfile-isolation -> Created distinct Dockerfile building and defaulting to each respective runner
     └── deployment-isolation -> Configured separate VideoSDK cloud deployment specs pointing directly to each runner path
 
+[2026-06-30T22:11:00+05:30] Remove deprecated codebase files
+├── File: packages/python/voice-agent/src/main.py
+├── File: packages/python/voice-agent/src/generate_env.py
+├── File: packages/python/voice-agent/build/Dockerfile.worker
+└── Changes:
+    └── cleanups -> Deleted redundant/obsolete files to strictly align with clean package standards
+
+
 
 
 
