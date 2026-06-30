@@ -8,15 +8,29 @@ Multi-provider AI voice agent platform built on [VideoSDK](https://videosdk.live
 
 | Pipeline | STT | LLM | TTS | Type |
 |---|---|---|---|---|
-| `openai_realtime` | — | GPT-4o Realtime | — | Realtime |
-| `google_realtime` | — | Gemini 2.0 Flash | — | Realtime |
-| `openai_cascade` | OpenAI Whisper | GPT-4o | OpenAI TTS | Cascade |
-| `google_cascade` | Google STT | Gemini 1.5 Flash | Google TTS | Cascade |
-| `sarvam_cascade` | Sarvam AI | Sarvam AI | Sarvam AI | Cascade |
-| `custom_cascade` | Deepgram | Claude 3.5 Sonnet | ElevenLabs | Cascade |
-| `sip` | OpenAI Whisper | GPT-4o | OpenAI TTS | SIP/Telephony |
+| `openai_realtime` | — | [GPT-4o Realtime](https://platform.openai.com/docs/guides/realtime) | — | Realtime |
+| `google_realtime` | — | [Gemini 2.0 Flash Live](https://ai.google.dev/gemini-api/docs/live) | — | Realtime |
+| `openai_cascade` | [OpenAI Whisper](https://platform.openai.com/docs/guides/speech-to-text) | [GPT-4o](https://platform.openai.com/docs/models/gpt-4o) | [OpenAI TTS](https://platform.openai.com/docs/guides/text-to-speech) | Cascade |
+| `google_cascade` | [Google STT](https://cloud.google.com/speech-to-text) | [Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini) | [Google TTS](https://cloud.google.com/text-to-speech) | Cascade |
+| `sarvam_cascade` | [Sarvam AI STT](https://www.sarvam.ai) | [Sarvam AI LLM](https://www.sarvam.ai) | [Sarvam AI TTS](https://www.sarvam.ai) | Cascade |
+| `custom_cascade` | [Deepgram Nova-2](https://deepgram.com/product/speech-to-text) | [Claude 3.5 Sonnet](https://www.anthropic.com/claude) | [ElevenLabs](https://elevenlabs.io) | Cascade |
+| `sip` | [OpenAI Whisper](https://platform.openai.com/docs/guides/speech-to-text) | [GPT-4o](https://platform.openai.com/docs/models/gpt-4o) | [OpenAI TTS](https://platform.openai.com/docs/guides/text-to-speech) | SIP/Telephony |
 
-All pipelines include **Silero VAD** for voice activity detection.
+All pipelines include **[Silero VAD](https://github.com/snakers4/silero-vad)** for voice activity detection.
+
+---
+
+## Provider API Keys — Where to Get Them
+
+| Provider | Signup / API Keys | Docs |
+|---|---|---|
+| [VideoSDK](https://videosdk.live) | [app.videosdk.live](https://app.videosdk.live/) | [docs.videosdk.live](https://docs.videosdk.live) |
+| [OpenAI](https://openai.com) | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) | [platform.openai.com/docs](https://platform.openai.com/docs) |
+| [Google AI (Gemini)](https://ai.google.dev) | [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) | [ai.google.dev/gemini-api/docs](https://ai.google.dev/gemini-api/docs) |
+| [Sarvam AI](https://www.sarvam.ai) | [dashboard.sarvam.ai](https://dashboard.sarvam.ai) | [docs.sarvam.ai](https://docs.sarvam.ai) |
+| [Deepgram](https://deepgram.com) | [console.deepgram.com](https://console.deepgram.com) | [developers.deepgram.com](https://developers.deepgram.com) |
+| [Anthropic (Claude)](https://www.anthropic.com) | [console.anthropic.com](https://console.anthropic.com) | [docs.anthropic.com](https://docs.anthropic.com) |
+| [ElevenLabs](https://elevenlabs.io) | [elevenlabs.io/app/api-key](https://elevenlabs.io/app/api-key) | [elevenlabs.io/docs](https://elevenlabs.io/docs) |
 
 ---
 
@@ -43,8 +57,8 @@ src/features/{pipeline}/
 
 - Python 3.12+
 - Docker & Docker Compose
-- A [VideoSDK](https://videosdk.live) account with API key and secret
-- Provider API keys for the pipeline you want to run
+- A [VideoSDK](https://videosdk.live) account — get your token at [app.videosdk.live](https://app.videosdk.live/)
+- Provider API keys for the pipeline you want to run (see table above)
 
 ---
 
@@ -61,23 +75,23 @@ Fill in the required keys for your chosen pipeline:
 
 ```env
 # Required for all pipelines
-VIDEOSDK_TOKEN=your_videosdk_jwt_token
+VIDEOSDK_TOKEN=your_videosdk_jwt_token       # https://app.videosdk.live
 VIDEOSDK_MEETING_ID=your_meeting_id
 INSTRUCTIONS=You are a helpful voice assistant.
 
 # OpenAI pipelines (openai_realtime, openai_cascade, sip)
-OPENAI_API_KEY=your_openai_key
+OPENAI_API_KEY=your_openai_key               # https://platform.openai.com/api-keys
 
 # Google pipelines (google_realtime, google_cascade)
-GOOGLE_API_KEY=your_google_key
+GOOGLE_API_KEY=your_google_key               # https://aistudio.google.com/app/apikey
 
 # Sarvam pipeline (sarvam_cascade)
-SARVAM_API_KEY=your_sarvam_key
+SARVAM_API_KEY=your_sarvam_key               # https://dashboard.sarvam.ai
 
 # Custom pipeline (custom_cascade)
-DEEPGRAM_API_KEY=your_deepgram_key
-ANTHROPIC_API_KEY=your_anthropic_key
-ELEVENLABS_API_KEY=your_elevenlabs_key
+DEEPGRAM_API_KEY=your_deepgram_key           # https://console.deepgram.com
+ANTHROPIC_API_KEY=your_anthropic_key         # https://console.anthropic.com
+ELEVENLABS_API_KEY=your_elevenlabs_key       # https://elevenlabs.io/app/api-key
 ```
 
 ---
@@ -153,6 +167,8 @@ videosdk deploy videosdk.yaml
 
 Each pipeline has its own `videosdk.yaml` — deploy them independently.
 
+> See [VideoSDK Deploy Docs](https://docs.videosdk.live/ai-agents/deploy) for full deployment reference.
+
 ---
 
 ## Edit a Pipeline
@@ -192,27 +208,29 @@ docker compose up --build
 
 ---
 
-## REST API (Optional)
-
-A lightweight FastAPI server is available for room creation and agent dispatch:
-
-```bash
-cd packages/python/voice-agent
-uvicorn api.rest.v1.server:app --host 0.0.0.0 --port 8000
-```
-
-Endpoints:
-- `POST /room/create` — create a VideoSDK meeting room
-- `POST /agent/dispatch` — dispatch an agent into a room
-
----
-
 ## Shared Utilities
 
 Located in `src/shared/utils/`:
 
 | File | Purpose |
 |---|---|
-| `token_generator.py` | Generate VideoSDK JWT tokens |
-| `room_creator.py` | Create VideoSDK meeting rooms via API |
+| `token_generator.py` | Generate [VideoSDK JWT tokens](https://docs.videosdk.live/api-reference/realtime-communication/intro) |
+| `room_creator.py` | Create [VideoSDK meeting rooms](https://docs.videosdk.live/api-reference/realtime-communication/create-room) via API |
 | `agent_dispatcher.py` | Dispatch agents into rooms via API |
+
+---
+
+## References
+
+- [VideoSDK AI Agents Docs](https://docs.videosdk.live/ai-agents/intro)
+- [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime)
+- [OpenAI Whisper STT](https://platform.openai.com/docs/guides/speech-to-text)
+- [OpenAI TTS](https://platform.openai.com/docs/guides/text-to-speech)
+- [Google Gemini Live API](https://ai.google.dev/gemini-api/docs/live)
+- [Google Cloud STT](https://cloud.google.com/speech-to-text/docs)
+- [Google Cloud TTS](https://cloud.google.com/text-to-speech/docs)
+- [Sarvam AI Docs](https://docs.sarvam.ai)
+- [Deepgram STT Docs](https://developers.deepgram.com/docs/getting-started-with-pre-recorded-audio)
+- [Anthropic Claude Docs](https://docs.anthropic.com/en/docs/intro-to-claude)
+- [ElevenLabs TTS Docs](https://elevenlabs.io/docs/api-reference/getting-started)
+- [Silero VAD](https://github.com/snakers4/silero-vad)
