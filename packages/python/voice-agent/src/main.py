@@ -2,7 +2,7 @@ import asyncio
 import os
 import logging
 from dotenv import load_dotenv
-from videosdk.agents import WorkerJob, JobContext
+from videosdk.agents import WorkerJob, Options, JobContext, RoomOptions
 
 from .features.voice_agent.index import VoiceAgentConfig, VoiceAgentService, VoiceAgentRepository
 
@@ -27,6 +27,25 @@ async def entrypoint(ctx: JobContext):
     
     await service.start_agent_session(config, ctx)
 
+def make_context():
+    room_options = RoomOptions(
+        room_id=os.getenv("VIDEOSDK_MEETING_ID", "default_meeting"),
+        auth_token=os.getenv("VIDEOSDK_TOKEN"),
+        name="VideoSDK Voice Agent"
+    )
+    return JobContext(room_options=room_options)
+
 if __name__ == "__main__":
-    job = WorkerJob(job_func=entrypoint)
+    options = Options(
+        agent_id="voice-agent-service",
+        max_processes=5,
+        register=True,
+        log_level="INFO"
+    )
+    
+    job = WorkerJob(
+        entrypoint=entrypoint,
+        jobctx=make_context,
+        options=options
+    )
     job.start()

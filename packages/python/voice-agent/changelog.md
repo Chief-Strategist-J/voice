@@ -34,5 +34,11 @@
     ├── room-creator -> Implemented HTTPS client calling /v2/rooms VideoSDK API
     └── rest-endpoint -> Added /room/create endpoint to FastAPI server
 
+[2026-06-30T21:42:00+05:30] Align worker execution config with production standards
+├── File: packages/python/voice-agent/src/main.py
+└── Changes:
+    └── worker-options -> Configured Options and JobContext parameters matching SDK reference
+
+
 
 
