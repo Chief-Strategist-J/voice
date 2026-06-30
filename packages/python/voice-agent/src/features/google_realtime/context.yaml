@@ -1,0 +1,6 @@
+name: google_realtime
+description: Voice assistant using Google Gemini Live low-latency API
+criticality: high
+dependencies:
+  - videosdk-plugins-google
+  - python-dotenv

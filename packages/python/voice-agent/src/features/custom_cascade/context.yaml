@@ -1,0 +1,9 @@
+name: custom_cascade
+description: Mixed provider cascade (Deepgram STT -> Anthropic Claude LLM -> ElevenLabs TTS)
+criticality: medium
+dependencies:
+  - videosdk-plugins-deepgram
+  - videosdk-plugins-anthropic
+  - videosdk-plugins-elevenlabs
+  - videosdk-plugins-silero
+  - python-dotenv

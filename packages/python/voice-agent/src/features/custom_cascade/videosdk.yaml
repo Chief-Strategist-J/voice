@@ -2,7 +2,7 @@ version: "1.0"
 deployment:
   id: voice_agent_custom_cascade
   entry:
-    path: packages/python/voice-agent/src/main_custom_cascade.py
+    path: packages/python/voice-agent/src/features/custom_cascade/runner.py
   env:
     path: packages/python/voice-agent/.env
   secrets:

@@ -15,4 +15,4 @@ RUN pip install -e .
 
 ENV PYTHONPATH=/app/src
 
-CMD ["python", "src/main_google_realtime.py"]
+CMD ["python", "src/features/google_realtime/runner.py"]

@@ -1,0 +1,7 @@
+name: sarvam_cascade
+description: Indian language voice assistant (Sarvam STT -> Sarvam LLM -> Sarvam TTS)
+criticality: medium
+dependencies:
+  - videosdk-plugins-sarvamai
+  - videosdk-plugins-silero
+  - python-dotenv

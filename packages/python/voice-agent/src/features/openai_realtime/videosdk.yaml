@@ -2,7 +2,7 @@ version: "1.0"
 deployment:
   id: voice_agent_openai_realtime
   entry:
-    path: packages/python/voice-agent/src/main_openai_realtime.py
+    path: packages/python/voice-agent/src/features/openai_realtime/runner.py
   env:
     path: packages/python/voice-agent/.env
   secrets:

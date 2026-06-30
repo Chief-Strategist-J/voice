@@ -1,8 +1,8 @@
 version: "1.0"
 deployment:
-  id: voice_agent_google_cascade
+  id: voice_agent_google_realtime
   entry:
-    path: packages/python/voice-agent/src/main_google_cascade.py
+    path: packages/python/voice-agent/src/features/google_realtime/runner.py
   env:
     path: packages/python/voice-agent/.env
   secrets:

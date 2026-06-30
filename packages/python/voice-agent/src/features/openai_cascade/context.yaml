@@ -1,0 +1,7 @@
+name: openai_cascade
+description: OpenAI speech stack voice assistant (OpenAI Whisper STT -> GPT-4o LLM -> OpenAI TTS)
+criticality: medium
+dependencies:
+  - videosdk-plugins-openai
+  - videosdk-plugins-silero
+  - python-dotenv

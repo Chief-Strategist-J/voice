@@ -15,4 +15,4 @@ RUN pip install -e .
 
 ENV PYTHONPATH=/app/src
 
-CMD ["python", "src/main_openai_cascade.py"]
+CMD ["python", "src/features/custom_cascade/runner.py"]

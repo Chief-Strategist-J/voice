@@ -1,0 +1,7 @@
+name: openai_realtime
+description: Voice assistant using OpenAI Realtime low-latency API
+criticality: high
+dependencies:
+  - videosdk-plugins-openai
+  - openai
+  - python-dotenv

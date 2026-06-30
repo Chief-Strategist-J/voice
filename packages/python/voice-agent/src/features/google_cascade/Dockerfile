@@ -15,4 +15,4 @@ RUN pip install -e .
 
 ENV PYTHONPATH=/app/src
 
-CMD ["python", "src/main_google_cascade.py"]
+CMD ["python", "src/features/google_cascade/runner.py"]

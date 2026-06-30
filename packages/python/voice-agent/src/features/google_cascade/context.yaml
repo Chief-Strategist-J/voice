@@ -1,0 +1,7 @@
+name: google_cascade
+description: Google speech stack voice assistant (Google STT -> Gemini LLM -> Google TTS)
+criticality: medium
+dependencies:
+  - videosdk-plugins-google
+  - videosdk-plugins-silero
+  - python-dotenv
