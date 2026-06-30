@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: voice-agent
+Version: 0.1.0
+Summary: Voice Agent Service built using VideoSDK Voice Agent Kit
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: videosdk-agents>=1.0.0
+Requires-Dist: openai>=1.0.0
+Requires-Dist: python-dotenv>=1.0.0
+
+# Voice Agent Service
+
+This sub-package implements real-time AI voice agents using the VideoSDK Voice Agent Kit.
+
+## Setup
+
+1. Ensure the virtual environment is active:
+   ```bash
+   source .venv/bin/activate
+   ```
+2. Install packages:
+   ```bash
+   uv pip install -e .
+   ```

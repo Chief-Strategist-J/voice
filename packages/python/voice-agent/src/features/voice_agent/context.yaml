@@ -1,0 +1,17 @@
+feature_name: voice_agent
+description: Real-time AI voice agent powered by VideoSDK Voice Agent Kit.
+criticality: HIGH - Core real-time media communication feature.
+business_logic:
+  - Connects to VideoSDK rooms as a participant.
+  - Receives live audio streams from other participants.
+  - Utilizes LLMs (like OpenAI GPT-4o-realtime or cascade pipelines) to produce speech responses.
+  - Plays back audio dynamically to the VideoSDK room.
+core_decisions:
+  - Architecture: Hexagonal Architecture pattern with clean separation of entry adapters and pure feature services.
+  - SDK: VideoSDK Agent SDK (`videosdk-agents`) for audio routing and session lifecycle management.
+dependencies:
+  - videosdk-agents
+  - openai
+  - python-dotenv
+networking:
+  - Relies on WebSockets and WebRTC connections to VideoSDK servers for real-time media streams.

@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/api/rest/v1/server.py
+src/features/voice_agent/index.py
+src/features/voice_agent/repository.py
+src/features/voice_agent/service.py
+src/features/voice_agent/types.py
+src/voice_agent.egg-info/PKG-INFO
+src/voice_agent.egg-info/SOURCES.txt
+src/voice_agent.egg-info/dependency_links.txt
+src/voice_agent.egg-info/requires.txt
+src/voice_agent.egg-info/top_level.txt
