@@ -21,3 +21,11 @@
 └── Changes:
     └── console-runner -> Implemented console_runner.py script using videosdk console mode
 
+[2026-06-30T21:38:00+05:30] Add VideoSDK JWT token generator and env utility
+├── File: packages/python/voice-agent/src/shared/utils/token_generator.py
+├── File: packages/python/voice-agent/src/generate_env.py
+└── Changes:
+    ├── token-generator -> Implemented HS256 JWT encoding for VideoSDK authentication
+    └── env-setup -> Implemented script to generate .env file using user api credentials
+
+
