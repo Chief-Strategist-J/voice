@@ -18,6 +18,45 @@ Multi-provider AI voice agent platform built on [VideoSDK](https://videosdk.live
 
 All pipelines include **[Silero VAD](https://github.com/snakers4/silero-vad)** for voice activity detection.
 
+Core SDK: [`videosdk-agents`](https://pypi.org/project/videosdk-agents/) · GitHub: [videosdk-live/agents](https://github.com/videosdk-live/agents)
+
+---
+
+## SDK & Plugins
+
+Each pipeline installs only what it needs. Install the core SDK plus the required plugin(s):
+
+```bash
+# Core SDK (required for all pipelines)
+pip install videosdk-agents
+
+# Per-provider plugins — install only what your pipeline uses
+pip install videosdk-plugins-openai      # OpenAI Realtime, Whisper STT, GPT-4o LLM, OpenAI TTS
+pip install videosdk-plugins-google      # Gemini Live, Google STT, Google LLM, Google TTS
+pip install videosdk-plugins-sarvamai    # Sarvam STT, Sarvam LLM, Sarvam TTS
+pip install videosdk-plugins-deepgram    # Deepgram Nova-2 STT
+pip install videosdk-plugins-anthropic   # Claude LLM
+pip install videosdk-plugins-elevenlabs  # ElevenLabs TTS
+pip install videosdk-plugins-silero      # Silero VAD (all pipelines)
+```
+
+Or install everything at once:
+
+```bash
+pip install "videosdk-agents[openai,google,sarvamai,deepgram,anthropic,elevenlabs,silero]"
+```
+
+| Plugin Package | PyPI | Used By |
+|---|---|---|
+| `videosdk-agents` | [pypi.org](https://pypi.org/project/videosdk-agents/) | All pipelines |
+| `videosdk-plugins-openai` | [pypi.org](https://pypi.org/project/videosdk-plugins-openai/) | `openai_realtime`, `openai_cascade`, `sip` |
+| `videosdk-plugins-google` | [pypi.org](https://pypi.org/project/videosdk-plugins-google/) | `google_realtime`, `google_cascade` |
+| `videosdk-plugins-sarvamai` | [pypi.org](https://pypi.org/project/videosdk-plugins-sarvamai/) | `sarvam_cascade` |
+| `videosdk-plugins-deepgram` | [pypi.org](https://pypi.org/project/videosdk-plugins-deepgram/) | `custom_cascade` |
+| `videosdk-plugins-anthropic` | [pypi.org](https://pypi.org/project/videosdk-plugins-anthropic/) | `custom_cascade` |
+| `videosdk-plugins-elevenlabs` | [pypi.org](https://pypi.org/project/videosdk-plugins-elevenlabs/) | `custom_cascade` |
+| `videosdk-plugins-silero` | [pypi.org](https://pypi.org/project/videosdk-plugins-silero/) | All pipelines (VAD) |
+
 ---
 
 ## Provider API Keys — Where to Get Them
@@ -222,7 +261,30 @@ Located in `src/shared/utils/`:
 
 ## References
 
-- [VideoSDK AI Agents Docs](https://docs.videosdk.live/ai-agents/intro)
+### VideoSDK Voice Agent SDK
+- [VideoSDK AI Agents — Introduction](https://docs.videosdk.live/ai_agents/introduction)
+- [VideoSDK AI Agents — Quickstart](https://docs.videosdk.live/ai_agents/introduction)
+- [videosdk-agents on PyPI](https://pypi.org/project/videosdk-agents/)
+- [videosdk-live/agents on GitHub](https://github.com/videosdk-live/agents)
+- [VideoSDK Dashboard (get token)](https://app.videosdk.live/)
+- [VideoSDK API Reference](https://docs.videosdk.live/api-reference/realtime-communication/intro)
+
+### Pipeline Architecture
+- [Cascaded Pipeline Guide](https://docs.videosdk.live/ai_agents/introduction)
+- [Realtime Pipeline Guide](https://docs.videosdk.live/ai_agents/introduction)
+- [Build Your Own Plugin](https://github.com/videosdk-live/agents)
+- [Silero VAD](https://github.com/snakers4/silero-vad)
+
+### Plugin Packages (PyPI)
+- [videosdk-plugins-openai](https://pypi.org/project/videosdk-plugins-openai/)
+- [videosdk-plugins-google](https://pypi.org/project/videosdk-plugins-google/)
+- [videosdk-plugins-sarvamai](https://pypi.org/project/videosdk-plugins-sarvamai/)
+- [videosdk-plugins-deepgram](https://pypi.org/project/videosdk-plugins-deepgram/)
+- [videosdk-plugins-anthropic](https://pypi.org/project/videosdk-plugins-anthropic/)
+- [videosdk-plugins-elevenlabs](https://pypi.org/project/videosdk-plugins-elevenlabs/)
+- [videosdk-plugins-silero](https://pypi.org/project/videosdk-plugins-silero/)
+
+### Provider Docs
 - [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime)
 - [OpenAI Whisper STT](https://platform.openai.com/docs/guides/speech-to-text)
 - [OpenAI TTS](https://platform.openai.com/docs/guides/text-to-speech)
@@ -233,4 +295,3 @@ Located in `src/shared/utils/`:
 - [Deepgram STT Docs](https://developers.deepgram.com/docs/getting-started-with-pre-recorded-audio)
 - [Anthropic Claude Docs](https://docs.anthropic.com/en/docs/intro-to-claude)
 - [ElevenLabs TTS Docs](https://elevenlabs.io/docs/api-reference/getting-started)
-- [Silero VAD](https://github.com/snakers4/silero-vad)
