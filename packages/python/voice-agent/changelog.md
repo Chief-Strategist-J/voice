@@ -100,6 +100,14 @@
     ├── manifest-creation -> Created distinct VideoSDK yaml deployment manifests for each pipeline variety
     └── main-updates -> Configured main.py to dynamically parse pipeline mode parameters from environment
 
+[2026-06-30T22:04:00+05:30] Add worker containerization configuration files
+├── File: packages/python/voice-agent/build/Dockerfile.worker
+├── File: packages/python/voice-agent/deploy/docker/docker-compose.worker.yaml
+└── Changes:
+    ├── worker-dockerfile -> Created Dockerfile.worker targeting background runner processes
+    └── worker-compose -> Added docker-compose orchestrator configuration for different worker instances
+
+
 
 
 

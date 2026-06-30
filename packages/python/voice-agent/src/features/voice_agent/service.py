@@ -1,31 +1,12 @@
 import os
 import logging
-from typing import Optional
 from videosdk.agents import Agent, AgentSession, Pipeline, JobContext
-from videosdk.agents.plugins import (
-    OpenAIRealtime,
-    OpenAIRealtimeConfig,
-    OpenAISTT,
-    OpenAILLM,
-    OpenAITTS,
-    SileroVAD,
-    GeminiRealtime,
-    GeminiLiveConfig,
-    GoogleSTT,
-    GoogleLLM,
-    GoogleTTS,
-    SarvamAISTT,
-    SarvamAILLM,
-    SarvamAITTS,
-    DeepgramSTT,
-    AnthropicLLM,
-    ElevenLabsTTS
-)
 
 from .types import VoiceAgentConfig, AgentSessionInfo
 from .repository import VoiceAgentRepository
 
 logger = logging.getLogger(__name__)
+
 
 class VideoSDKVoiceAgent(Agent):
     def __init__(self, instructions: str):
@@ -49,58 +30,42 @@ class VoiceAgentService:
             anthropic_key = config.anthropic_api_key or os.getenv("ANTHROPIC_API_KEY", "")
 
             if config.pipeline_mode == "google_realtime":
-                gemini_config = GeminiLiveConfig(
-                    api_key=google_key,
-                    model="gemini-2.0-flash-exp"
-                )
+                from videosdk.agents.plugins import GeminiRealtime, GeminiLiveConfig
+                gemini_config = GeminiLiveConfig(api_key=google_key, model="gemini-2.0-flash-exp")
                 model = GeminiRealtime(config=gemini_config)
                 pipeline = Pipeline(llm=model)
 
             elif config.pipeline_mode == "google_cascade":
+                from videosdk.agents.plugins import GoogleSTT, GoogleLLM, GoogleTTS, SileroVAD
                 stt = GoogleSTT(api_key=google_key)
-                llm = GoogleLLM(api_key=google_key, instructions=config.instructions)
+                llm = GoogleLLM(api_key=google_key)
                 tts = GoogleTTS(api_key=google_key)
-                pipeline = Pipeline(
-                    stt=stt,
-                    llm=llm,
-                    tts=tts,
-                    vad=SileroVAD()
-                )
+                pipeline = Pipeline(stt=stt, llm=llm, tts=tts, vad=SileroVAD())
 
             elif config.pipeline_mode == "sarvam_cascade":
+                from videosdk.agents.plugins import SarvamAISTT, SarvamAILLM, SarvamAITTS, SileroVAD
                 stt = SarvamAISTT(api_key=sarvam_key)
-                llm = SarvamAILLM(api_key=sarvam_key, instructions=config.instructions)
+                llm = SarvamAILLM(api_key=sarvam_key)
                 tts = SarvamAITTS(api_key=sarvam_key)
-                pipeline = Pipeline(
-                    stt=stt,
-                    llm=llm,
-                    tts=tts,
-                    vad=SileroVAD()
-                )
+                pipeline = Pipeline(stt=stt, llm=llm, tts=tts, vad=SileroVAD())
 
             elif config.pipeline_mode == "custom_cascade":
+                # STT: Deepgram | LLM: Claude (Anthropic) | TTS: ElevenLabs
+                from videosdk.agents.plugins import DeepgramSTT, AnthropicLLM, ElevenLabsTTS, SileroVAD
                 stt = DeepgramSTT(api_key=deepgram_key)
-                llm = AnthropicLLM(api_key=anthropic_key, instructions=config.instructions)
+                llm = AnthropicLLM(api_key=anthropic_key)
                 tts = ElevenLabsTTS(api_key=elevenlabs_key)
-                pipeline = Pipeline(
-                    stt=stt,
-                    llm=llm,
-                    tts=tts,
-                    vad=SileroVAD()
-                )
+                pipeline = Pipeline(stt=stt, llm=llm, tts=tts, vad=SileroVAD())
 
             elif config.pipeline_mode == "cascade":
+                from videosdk.agents.plugins import OpenAISTT, OpenAILLM, OpenAITTS, SileroVAD
                 stt = OpenAISTT(api_key=openai_key)
-                llm = OpenAILLM(api_key=openai_key, model="gpt-4o-mini", instructions=config.instructions)
+                llm = OpenAILLM(api_key=openai_key)
                 tts = OpenAITTS(api_key=openai_key, voice=config.voice_name)
-                pipeline = Pipeline(
-                    stt=stt,
-                    llm=llm,
-                    tts=tts,
-                    vad=SileroVAD()
-                )
+                pipeline = Pipeline(stt=stt, llm=llm, tts=tts, vad=SileroVAD())
 
             else:
+                from videosdk.agents.plugins import OpenAIRealtime, OpenAIRealtimeConfig
                 model_config = OpenAIRealtimeConfig(
                     api_key=openai_key,
                     voice=config.voice_name,

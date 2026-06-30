@@ -1,0 +1,37 @@
+services:
+  openai-realtime-agent:
+    build:
+      context: ../../
+      dockerfile: build/Dockerfile.worker
+    environment:
+      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
+      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PIPELINE_MODE=realtime
+      - AGENT_ID=voice-agent-openai-realtime
+    restart: unless-stopped
+
+  google-realtime-agent:
+    build:
+      context: ../../
+      dockerfile: build/Dockerfile.worker
+    environment:
+      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
+      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - PIPELINE_MODE=google_realtime
+      - AGENT_ID=voice-agent-google-realtime
+    restart: unless-stopped
+
+  sip-agent:
+    build:
+      context: ../../
+      dockerfile: build/Dockerfile.worker
+    command: ["python", "src/main_sip.py"]
+    environment:
+      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
+      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - AGENT_ID=sip-agent-service
+    restart: unless-stopped
