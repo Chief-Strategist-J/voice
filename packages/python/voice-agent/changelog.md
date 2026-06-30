@@ -107,6 +107,12 @@
     ├── worker-dockerfile -> Created Dockerfile.worker targeting background runner processes
     └── worker-compose -> Added docker-compose orchestrator configuration for different worker instances
 
+[2026-06-30T22:05:00+05:30] Declare separate docker compose services for every pipeline mode
+├── File: packages/python/voice-agent/deploy/docker/docker-compose.worker.yaml
+└── Changes:
+    └── worker-scaling -> Declared Google Realtime, Google Cascade, Sarvam, and Custom Cascade services separately
+
+
 
 
 

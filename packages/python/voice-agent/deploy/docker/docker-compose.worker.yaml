@@ -24,6 +24,57 @@ services:
       - AGENT_ID=voice-agent-google-realtime
     restart: unless-stopped
 
+  google-cascade-agent:
+    build:
+      context: ../../
+      dockerfile: build/Dockerfile.worker
+    environment:
+      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
+      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - PIPELINE_MODE=google_cascade
+      - AGENT_ID=voice-agent-google-cascade
+    restart: unless-stopped
+
+  sarvam-cascade-agent:
+    build:
+      context: ../../
+      dockerfile: build/Dockerfile.worker
+    environment:
+      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
+      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
+      - SARVAM_API_KEY=${SARVAM_API_KEY}
+      - PIPELINE_MODE=sarvam_cascade
+      - AGENT_ID=voice-agent-sarvam-cascade
+    restart: unless-stopped
+
+  custom-cascade-agent:
+    build:
+      context: ../../
+      dockerfile: build/Dockerfile.worker
+    environment:
+      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
+      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
+      - DEEPGRAM_API_KEY=${DEEPGRAM_API_KEY}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - PIPELINE_MODE=custom_cascade
+      - AGENT_ID=voice-agent-custom-cascade
+    restart: unless-stopped
+
+  openai-cascade-agent:
+    build:
+      context: ../../
+      dockerfile: build/Dockerfile.worker
+    environment:
+      - VIDEOSDK_TOKEN=${VIDEOSDK_TOKEN}
+      - VIDEOSDK_MEETING_ID=${VIDEOSDK_MEETING_ID}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PIPELINE_MODE=cascade
+      - AGENT_ID=voice-agent-openai-cascade
+    restart: unless-stopped
+
   sip-agent:
     build:
       context: ../../
