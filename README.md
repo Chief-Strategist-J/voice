@@ -40,7 +40,8 @@ voice/
 │           │       └── sip/               ← self-contained pipeline
 │           ├── deploy/
 │           │   └── docker/
-│           │       └── docker-compose.worker.yaml  ← run all pipelines
+│           │       ├── docker-compose.worker.yaml   ← run all pipelines
+│           │       └── docker-compose.langfuse.yaml ← self-hosted tracing backend
 │           └── README.md                  ← full usage guide
 └── policies/                              ← development rules & architecture
 ```
@@ -83,6 +84,10 @@ videosdk deploy videosdk.yaml
 ```
 
 That's it. **You never need to leave the pipeline folder.**
+
+Want to see per-turn STT/LLM/TTS traces (cost, latency, TTFT)? See
+[Tracing (Self-Hosted Langfuse)](packages/python/voice-agent/README.md#tracing-self-hosted-langfuse)
+in the full usage guide.
 
 ---
 

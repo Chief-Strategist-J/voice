@@ -57,13 +57,19 @@ if __name__ == "__main__":
     else:
         print("[tracing] disabled (set TRACING_ENABLED=true in .env to turn on)")
 
+    # register=true (default): cloud-dispatch mode -- registers with the
+    # VideoSDK backend and waits idle for a job (dashboard / dispatch API).
+    # register=false: connects immediately and prints a joinable playground
+    # URL -- use this for local testing (REGISTER=false python runner.py).
+    register = os.getenv("REGISTER", "true").lower() == "true"
+
     job = WorkerJob(
         entrypoint=entrypoint,
         jobctx=make_context,
         options=Options(
             agent_id="voice-agent-sarvam-cascade",
             max_processes=5,
-            register=True,
+            register=register,
             log_level="INFO",
             # 8081 collides with other services on shared dev machines;
             # override via DEBUG_PORT if this is taken too.

@@ -127,6 +127,15 @@ GOOGLE_API_KEY=your_google_key               # https://aistudio.google.com/app/a
 # Sarvam pipeline (sarvam_cascade)
 SARVAM_API_KEY=your_sarvam_key               # https://dashboard.sarvam.ai
 
+# sarvam_cascade only: leave VIDEOSDK_MEETING_ID / VIDEOSDK_TOKEN unset and
+# src/meeting.py will self-issue a JWT and auto-create a room for you.
+
+# Tracing (optional, any pipeline — see "Tracing" section below)
+TRACING_ENABLED=false
+LANGFUSE_HOST=http://localhost:3000
+LANGFUSE_PUBLIC_KEY=pk-lf-voice-agent-dev
+LANGFUSE_SECRET_KEY=sk-lf-voice-agent-dev
+
 # Custom pipeline (custom_cascade)
 DEEPGRAM_API_KEY=your_deepgram_key           # https://console.deepgram.com
 ANTHROPIC_API_KEY=your_anthropic_key         # https://console.anthropic.com
@@ -181,6 +190,50 @@ docker compose -f deploy/docker/docker-compose.worker.yaml up --build sarvam-cas
 
 ---
 
+## Tracing (Self-Hosted Langfuse)
+
+Every pipeline can export OpenTelemetry traces (per-turn VAD, STT, EOU, LLM
+with TTFT, TTS, errors/interruptions — built into `videosdk-agents` itself,
+no manual instrumentation needed) to a self-hosted [Langfuse](https://langfuse.com)
+instance, shared across all pipelines.
+
+Start it once from the `voice-agent` root:
+
+```bash
+docker compose -f deploy/docker/docker-compose.langfuse.yaml -p langfuse-voice-agent up -d
+```
+
+`-p langfuse-voice-agent` pins an explicit project name — without it, Compose
+infers the name from the parent folder (`docker`), which can collide with
+any other compose file living in a sibling `deploy/docker/` folder on the
+same machine. The compose file also sets `name:` internally as a second
+layer of protection; never remove either.
+
+The stack provisions itself headlessly (org/project/user/API keys created on
+first boot — no signup or UI step) with these defaults:
+
+- URL: http://localhost:3000
+- Login: `admin@voice-agent.local` / `changeme123`
+- API keys: `pk-lf-voice-agent-dev` / `sk-lf-voice-agent-dev`
+
+Override the `LANGFUSE_INIT_*` values in the compose file before exposing
+this beyond localhost.
+
+Then in a pipeline's `.env`, set `TRACING_ENABLED=true` (and the
+`LANGFUSE_*` vars if you changed the defaults above) and run it as usual.
+Traces show up under **Tracing** in the Langfuse sidebar.
+
+One gotcha: if the pipeline runs inside its own `docker compose up`
+container (rather than `python runner.py` directly), `localhost` inside
+that container won't reach Langfuse on the host. Use
+`LANGFUSE_HOST=http://host.docker.internal:3000` instead — the pipeline's
+`docker-compose.yaml` already adds the required `extra_hosts` entry for
+this to resolve on Linux.
+
+**Demo:** [Tracing walkthrough video](https://drive.google.com/file/d/1TleC4yhzONaK8AYtRJkC4GcbvBpR5_Bp/view?usp=sharing)
+
+---
+
 ## Run Locally (Without Docker)
 
 ```bash
@@ -191,9 +244,39 @@ pip install -r requirements.txt
 # Set environment variables
 cp /path/to/.env .env
 
-# Run
+# Run (cloud-dispatch mode)
 python runner.py
 ```
+
+This runs in **cloud-dispatch mode** — it registers with the VideoSDK
+backend and sits idle waiting for a job (dispatched via the VideoSDK
+dashboard or dispatch API). It does **not** print a link to join, since
+nothing has connected yet — this is the correct mode for how these
+pipelines actually get used in production.
+
+To test interactively instead, run in **direct mode**: it connects to a
+room immediately and prints a clickable playground URL.
+
+```bash
+REGISTER=false python runner.py
+```
+
+```
+Agent started in playground mode
+Interact with agent here at:
+https://playground.videosdk.live/cli?token=...&meetingId=...
+```
+
+Open that URL in a browser to talk to the agent directly. The process
+blocks for the duration of the call (via `ctx.run_until_shutdown`) and
+exits cleanly on Ctrl+C. `sarvam_cascade/runner.py` wires this `REGISTER`
+toggle already; copy the same one-line change into a pipeline's `runner.py`
+to enable it there too.
+
+The SDK also binds a local debug/health server on port `8081` by default,
+which can collide with other services on a shared dev machine. Override it
+with `DEBUG_PORT=<port>` in `.env` if you hit `address already in use`
+(`sarvam_cascade/runner.py` already reads this).
 
 ---
 
