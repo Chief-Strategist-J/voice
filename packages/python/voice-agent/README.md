@@ -197,6 +197,8 @@ with TTFT, TTS, errors/interruptions — built into `videosdk-agents` itself,
 no manual instrumentation needed) to a self-hosted [Langfuse](https://langfuse.com)
 instance, shared across all pipelines.
 
+![Langfuse tracing dashboard](docs/langfuse-tracing.png)
+
 Start it once from the `voice-agent` root:
 
 ```bash

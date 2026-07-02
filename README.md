@@ -4,6 +4,8 @@ Multi-provider AI voice agent platform built on [VideoSDK](https://videosdk.live
 
 > 📦 Full usage guide → [`packages/python/voice-agent/README.md`](packages/python/voice-agent/README.md)
 
+[![Watch the demo](https://img.shields.io/badge/▶-Watch_the_demo_video-red?style=for-the-badge)](https://drive.google.com/file/d/1TleC4yhzONaK8AYtRJkC4GcbvBpR5_Bp/view?usp=sharing)
+
 ---
 
 ## Pipelines
@@ -19,6 +21,20 @@ Multi-provider AI voice agent platform built on [VideoSDK](https://videosdk.live
 | `sip` | [OpenAI Whisper](https://platform.openai.com/docs/guides/speech-to-text) | [GPT-4o](https://platform.openai.com/docs/models/gpt-4o) | [OpenAI TTS](https://platform.openai.com/docs/guides/text-to-speech) | SIP/Telephony |
 
 All pipelines use **[Silero VAD](https://github.com/snakers4/silero-vad)** · SDK: [`videosdk-agents`](https://pypi.org/project/videosdk-agents/) · [GitHub](https://github.com/videosdk-live/agents)
+
+---
+
+## Tracing
+
+Every pipeline exports per-turn STT/LLM/TTS traces (cost, latency, TTFT) to a
+self-hosted [Langfuse](https://langfuse.com) instance — no manual
+instrumentation, no signup step. See
+[Tracing (Self-Hosted Langfuse)](packages/python/voice-agent/README.md#tracing-self-hosted-langfuse)
+for setup.
+
+![Langfuse tracing dashboard](packages/python/voice-agent/docs/langfuse-tracing.png)
+
+[![Watch the tracing demo](https://img.shields.io/badge/▶-Watch_the_tracing_demo-red?style=for-the-badge)](https://drive.google.com/file/d/1TleC4yhzONaK8AYtRJkC4GcbvBpR5_Bp/view?usp=sharing)
 
 ---
 
