@@ -11,6 +11,9 @@ class GoogleCascadeAgent(Agent):
     async def on_enter(self) -> None:
         await self.session.say("Hello! I am your Google Cascade assistant. How can I help?")
 
+    async def on_exit(self) -> None:
+        pass
+
 async def build_session(ctx: JobContext) -> AgentSession:
     google_key = os.getenv("GOOGLE_API_KEY", "")
     pipeline = Pipeline(
@@ -20,5 +23,8 @@ async def build_session(ctx: JobContext) -> AgentSession:
         vad=SileroVAD()
     )
     agent = GoogleCascadeAgent()
-    await ctx.connect()
-    return AgentSession(agent=agent, pipeline=pipeline, context=ctx)
+    # No ctx.connect() here and no `context=` kwarg -- AgentSession has no
+    # such param, it discovers the active JobContext itself. runner.py's
+    # entrypoint calls ctx.run_until_shutdown(session, ...), which connects,
+    # starts the session, and blocks until the call actually ends.
+    return AgentSession(agent=agent, pipeline=pipeline)

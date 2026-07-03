@@ -4,3 +4,4 @@ videosdk-plugins-anthropic
 videosdk-plugins-elevenlabs
 videosdk-plugins-silero
 python-dotenv
+pyjwt
