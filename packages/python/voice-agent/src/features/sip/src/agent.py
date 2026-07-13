@@ -1,6 +1,6 @@
 import os
 from videosdk.agents import Agent, AgentSession, Pipeline, JobContext
-from videosdk.agents.plugins import OpenAISTT, OpenAILLM, OpenAITTS, SileroVAD
+from videosdk.agents.plugins import SarvamAISTT, SarvamAILLM, SarvamAITTS, SileroVAD
 
 class SIPVoiceAgent(Agent):
     def __init__(self):
@@ -9,17 +9,17 @@ class SIPVoiceAgent(Agent):
         )
 
     async def on_enter(self) -> None:
-        await self.session.say("Hello! You have reached the voice assistant. How can I help?")
+        await self.session.say("Hello! I am your Sarvam assistant. How can I help?")
 
     async def on_exit(self) -> None:
         pass
 
 async def build_session(ctx: JobContext) -> AgentSession:
-    openai_key = os.getenv("OPENAI_API_KEY", "")
+    sarvam_key = os.getenv("SARVAM_API_KEY", "")
     pipeline = Pipeline(
-        stt=OpenAISTT(api_key=openai_key),
-        llm=OpenAILLM(api_key=openai_key, model=os.getenv("MODEL_NAME", "gpt-4o")),
-        tts=OpenAITTS(api_key=openai_key),
+        stt=SarvamAISTT(api_key=sarvam_key),
+        llm=SarvamAILLM(api_key=sarvam_key),
+        tts=SarvamAITTS(api_key=sarvam_key),
         vad=SileroVAD()
     )
     agent = SIPVoiceAgent()
